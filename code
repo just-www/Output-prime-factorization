@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+int main() {
+    int input;
+    scanf("%d", &input);
+
+    int a = 2;
+    int c[100]; // 預設空間夠用
+    int count = 0; // 從0開始計數
+
+    while (input > 1) {
+        if (input % a == 0) {
+            input /= a;
+            c[count] = a; // 先存，再++
+            count++;
+        } else {
+            a++;
+        }
+    }
+
+    // 整理輸出
+    int i = 0;
+    while (i < count) {
+        int factor = c[i];
+        int times = 1;
+        i++;
+        while (i < count && c[i] == factor) {
+            times++;
+            i++;
+        }
+
+        if (times == 1)
+            printf("%d", factor);
+        else
+            printf("%d^%d", factor, times);
+
+        if (i < count)
+            printf(" * ");
+    }
+    
+    printf("\n");
+    return 0;
+}
